@@ -1,10 +1,13 @@
 import React, { memo } from 'react'
+import { useRoutes } from 'react-router-dom'
+import router from './router'
 
 const App = memo(() => {
   return (
     <div>
-      App
-      <h1>哈哈哈</h1>
+      <div className="header">header</div>
+      <div className="content">{useRoutes(router)}</div>
+      <div className="footer">footer</div>
     </div>
   )
 })
