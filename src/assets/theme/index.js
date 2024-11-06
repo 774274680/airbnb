@@ -1,6 +1,7 @@
 const theme = {
   color: {
     primaryColor: '#ff385c',
+    secondaryColor: '#007d85',
   },
   mixin: {
     boxShadow: `

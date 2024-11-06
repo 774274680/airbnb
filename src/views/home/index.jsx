@@ -4,37 +4,41 @@ import { fetchHomeDataAction } from '@/store/modules/home'
 
 import HomeBanner from './c-cpns/home-banner'
 import { HomeWrapper } from './style'
-import SectionHeader from '@/components/section-header'
-// import RoomItem from '@/components/room-item'
-import SectionRooms from '@/components/section-rooms'
+import HomeSectionV1 from './c-cpns/home-section-v1/index'
+import HomeSectionV2 from './c-cpns/home-section-v2'
+import isEmptyObject from '@/utils/is-empty-object'
 
 const home = memo(() => {
-  const { goodPriceInfo } = useSelector((state) => {
-    return {
-      goodPriceInfo: state.home.goodPriceInfo,
-    }
-  }, shallowEqual)
+  const { goodPriceInfo, highScoreInfo, discountInfo, recommendInfo } =
+    useSelector((state) => {
+      return {
+        goodPriceInfo: state.home.goodPriceInfo,
+        highScoreInfo: state.home.highScoreInfo,
+        discountInfo: state.home.discountInfo,
+        recommendInfo: state.home.recommendInfo,
+      }
+    }, shallowEqual)
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(fetchHomeDataAction())
   }, [])
+
   return (
     <HomeWrapper>
       <HomeBanner />
       <div className="container">
-        <div className="good-price">
-          <SectionHeader title={goodPriceInfo.title} />
-          {/* <div className="room-list">
-            {goodPriceInfo.list?.slice(0, 8).map((item) => {
-              return (
-                <div className="room-list-item" key={item.id}>
-                  <RoomItem itemData={item} />
-                </div>
-              )
-            })}
-          </div> */}
-          <SectionRooms roomList={goodPriceInfo.list} />
-        </div>
+        {isEmptyObject(goodPriceInfo) && (
+          <HomeSectionV1 sectionData={goodPriceInfo}></HomeSectionV1>
+        )}
+        {isEmptyObject(highScoreInfo) && (
+          <HomeSectionV1 sectionData={highScoreInfo}></HomeSectionV1>
+        )}
+        {isEmptyObject(discountInfo) && (
+          <HomeSectionV2 sectionData={discountInfo}></HomeSectionV2>
+        )}
+        {isEmptyObject(recommendInfo) && (
+          <HomeSectionV2 sectionData={recommendInfo}></HomeSectionV2>
+        )}
       </div>
     </HomeWrapper>
   )
