@@ -9,6 +9,7 @@ export const TabsWrapper = styled.div`
     margin-right: 10px;
     cursor: pointer;
     background-color: #fdfdfc;
+    white-space: nowrap;
     &.active {
       background-color: ${(props) => props.theme.color.secondaryColor};
       color: #fff;

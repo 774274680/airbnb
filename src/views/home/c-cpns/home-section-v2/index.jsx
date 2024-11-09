@@ -6,6 +6,7 @@ import SectionHeader from '@/components/section-header'
 import SectionRooms from '@/components/section-rooms'
 import SectionTabs from '@/components/section-tabs'
 import SectionFooter from '@/components/section-footer'
+import ScrollView from '@/base-ui/scroll-view'
 
 const HomeSectionV2 = memo((props) => {
   const { sectionData } = props
@@ -23,10 +24,13 @@ const HomeSectionV2 = memo((props) => {
         title={sectionData.title}
         subtitle={sectionData.subtitle}
       ></SectionHeader>
-      <SectionTabs
-        tabList={Object.keys(sectionData.dest_list)}
-        tabClickHandler={tabClickHandler}
-      />
+      <ScrollView>
+        <SectionTabs
+          tabList={Object.keys(sectionData.dest_list)}
+          tabClickHandler={tabClickHandler}
+        />
+      </ScrollView>
+
       <SectionRooms
         roomList={sectionData.dest_list[name]}
         itemWidth="33%"
